@@ -1,0 +1,4 @@
+name: ito
+version: '${project.version}'
+main: net.tv.twitch.chrono_fish.ito.Ito
+api-version: '1.20'
