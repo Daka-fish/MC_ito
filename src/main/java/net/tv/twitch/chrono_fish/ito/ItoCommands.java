@@ -10,6 +10,9 @@ public class ItoCommands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(sender instanceof Player){
             Player snd = (Player) sender;
+            if(command.getName().equalsIgnoreCase("ito")){
+                CommandManager.ito(snd, args);
+            }
         }
         return false;
     }

@@ -10,5 +10,10 @@ public final class Ito extends JavaPlugin {
         registerCommands();
     }
 
-    public void registerCommands(){}
+    public void registerCommands(){
+        for(String commandName : getDescription().getCommands().keySet()){
+            getCommand(commandName).setExecutor(new ItoCommands());
+        }
+
+    }
 }
