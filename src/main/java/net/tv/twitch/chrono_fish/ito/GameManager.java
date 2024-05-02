@@ -19,6 +19,7 @@ public class GameManager {
 
     public void setTheme(String theme) {
         this.theme = theme;
+        BossBarManager.getBossBar().setTitle(theme);
     }
 
     public String getTheme() {
