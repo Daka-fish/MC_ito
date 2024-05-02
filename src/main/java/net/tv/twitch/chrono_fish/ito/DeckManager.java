@@ -7,13 +7,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class Deck {
+public class DeckManager {
     int count;
     List<Card> deck = new ArrayList<>();
     List<Card> field = new ArrayList<>();
     HashMap<Player, Card> map = new HashMap<>();
 
-    Deck(){
+    DeckManager(){
         setDeck();
         shuffleDeck();
     }
@@ -28,10 +28,14 @@ public class Deck {
         Collections.shuffle(deck);
     }
 
-    public Card drawCard(){
-        Card fstCard = this.deck.get(0);
+    public List<Card> getDeck() {
+        return deck;
+    }
+
+    public void drawCard(Player player, List<Card> deck){
+        Card fstCard = deck.get(0);
         this.deck.remove(0);
-        return fstCard;
+        putMap(player, fstCard);
     }
 
     public void putField(Card card){
