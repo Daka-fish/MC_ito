@@ -11,4 +11,10 @@ public class Deck {
     List<Card> deck = new ArrayList<>();
     List<Card> field = new ArrayList<>();
     HashMap<Player, Card> map = new HashMap<>();
+
+    public void makeDeck(){
+        for(int i=1; i<=100;i++){
+            deck.add(new Card(i));
+        }
+    }
 }
