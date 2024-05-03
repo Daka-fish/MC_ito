@@ -17,7 +17,7 @@ public class BossBarManager {
         return bossBar;
     }
 
-    public void addAllPlayer(){
+    public static void addAllPlayer(){
         for(Player player : Bukkit.getOnlinePlayers()){
             bossBar.addPlayer(player);
         }

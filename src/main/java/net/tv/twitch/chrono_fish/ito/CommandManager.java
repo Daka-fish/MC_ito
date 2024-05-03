@@ -1,5 +1,7 @@
 package net.tv.twitch.chrono_fish.ito;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -11,7 +13,7 @@ public class CommandManager {
         }
 
         GameManager gameManager = new GameManager();
-        BossBarManager bossBarManager = new BossBarManager();
+        DeckManager deckManager = new DeckManager();
 
         switch (args[0]) {
             case "start":
@@ -22,15 +24,19 @@ public class CommandManager {
             case "theme":
                 sender.sendMessage("テーマを決定します");
                 gameManager.setTheme(args[1]);
-                bossBarManager.addAllPlayer();
+                BossBarManager.addAllPlayer();
                 break;
                 
             case "call":
                 sender.sendMessage("数字の宣言を開始します");
                 break;
+
             case "check":
                 sender.sendMessage("成功判定をします");
+                List<Card> field = deckManager.getField();
+                gameManager.check(field);
                 break;
+
             case "end":
                 sender.sendMessage("ゲームを強制終了します");
                 break;

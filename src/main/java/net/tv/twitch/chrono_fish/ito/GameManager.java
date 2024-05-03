@@ -26,7 +26,15 @@ public class GameManager {
         return theme;
     }
 
-    public void check(){}
+    public boolean check(List<Card> field){
+        for(int i=0; i<field.size(); i++){
+            if(i+1<field.size()){
+                if(field.indexOf(i)<field.indexOf(i+1)) continue;
+                else{return false;}
+            }
+        }
+        return true;
+    }
 
     public void endGame(){}
 }
