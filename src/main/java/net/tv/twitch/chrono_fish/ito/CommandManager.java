@@ -9,13 +9,22 @@ public class CommandManager {
             sender.sendMessage(ChatColor.RED+"Invalid usage");
             return;
         }
+
+        GameManager gameManager = new GameManager();
+        BossBarManager bossBarManager = new BossBarManager();
+
         switch (args[0]) {
             case "start":
                 sender.sendMessage("ゲームを開始します");
+                gameManager.startGame();
                 break;
+
             case "theme":
                 sender.sendMessage("テーマを決定します");
+                gameManager.setTheme(args[1]);
+                bossBarManager.addAllPlayer();
                 break;
+                
             case "call":
                 sender.sendMessage("数字の宣言を開始します");
                 break;
