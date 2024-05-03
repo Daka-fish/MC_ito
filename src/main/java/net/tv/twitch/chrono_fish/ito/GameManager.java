@@ -27,18 +27,15 @@ public class GameManager {
     }
 
     public void check(List<Card> field){
-        boolean success = true;
         for(int i=0; i<field.size(); i++){
             if(i+1<field.size()){
-                if(field.indexOf(i)<field.indexOf(i+1)){
+                if(field.get(i).getNumber()<field.get(i+1).getNumber()){
                      continue;
                 }else{
-                    success=false;
                     return;//失敗
                 }
             }
         }
-        success = true;
         broadcastMessage("成功！");
     }
 

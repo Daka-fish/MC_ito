@@ -1,7 +1,7 @@
 package net.tv.twitch.chrono_fish.ito;
 
 public class Card {
-    int number;
+    private int number;
     Card(int i){
         this.number = i;
     }
