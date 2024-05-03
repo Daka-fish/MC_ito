@@ -26,15 +26,25 @@ public class GameManager {
         return theme;
     }
 
-    public boolean check(List<Card> field){
+    public void check(List<Card> field){
+        boolean success = true;
         for(int i=0; i<field.size(); i++){
             if(i+1<field.size()){
-                if(field.indexOf(i)<field.indexOf(i+1)) continue;
-                else{return false;}
+                if(field.indexOf(i)<field.indexOf(i+1)){
+                     continue;
+                }else{
+                    success=false;
+                    return;//失敗
+                }
             }
         }
-        return true;
+        success = true;
+        broadcastMessage("成功！");
     }
 
     public void endGame(){}
+
+    public void broadcastMessage(String message){
+        Bukkit.broadcastMessage(message);
+    }
 }

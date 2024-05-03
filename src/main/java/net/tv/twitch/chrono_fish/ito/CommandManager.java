@@ -34,7 +34,6 @@ public class CommandManager {
             case "check":
                 sender.sendMessage("成功判定をします");
                 List<Card> field = deckManager.getField();
-                gameManager.check(field);
                 break;
 
             case "end":
