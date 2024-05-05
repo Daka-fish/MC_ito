@@ -1,3 +1,6 @@
-net\tv\twitch\chrono_fish\ito\Ito.class
-net\tv\twitch\chrono_fish\ito\ItoCommands.class
 net\tv\twitch\chrono_fish\ito\CommandManager.class
+net\tv\twitch\chrono_fish\ito\Deck.class
+net\tv\twitch\chrono_fish\ito\Ito.class
+net\tv\twitch\chrono_fish\ito\ItoGame$GameState.class
+net\tv\twitch\chrono_fish\ito\ItoCommands.class
+net\tv\twitch\chrono_fish\ito\ItoGame.class

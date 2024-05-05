@@ -13,18 +13,11 @@ public class CommandManager {
         }
 
         GameManager gameManager = new GameManager();
-        DeckManager deckManager = new DeckManager();
 
         switch (args[0]) {
             case "start":
                 sender.sendMessage("ゲームを開始します");
-                gameManager.startGame();
-                break;
-
-            case "theme":
-                sender.sendMessage("テーマを決定します");
-                gameManager.setTheme(args[1]);
-                BossBarManager.addAllPlayer();
+                gameManager.startGame(args[1]);
                 break;
                 
             case "call":
@@ -33,12 +26,11 @@ public class CommandManager {
 
             case "check":
                 sender.sendMessage("成功判定をします");
-                List<Card> field = deckManager.getField();
-                gameManager.check(field);
                 break;
 
             case "end":
-                sender.sendMessage("ゲームを強制終了します");
+                sender.sendMessage("ゲームを終了します");
+
                 break;
             default:
                 sender.sendMessage("不明なコマンドです");
