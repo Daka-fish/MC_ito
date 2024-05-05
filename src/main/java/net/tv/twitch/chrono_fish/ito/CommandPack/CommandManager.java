@@ -29,7 +29,7 @@ public class CommandManager {
 
             case "end":
                 sender.sendMessage("ゲームを終了します");
-
+                gameManager.endGame();
                 break;
             default:
                 sender.sendMessage("不明なコマンドです");

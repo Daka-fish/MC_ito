@@ -1,15 +1,14 @@
 package net.tv.twitch.chrono_fish.ito.GamePack;
 
 public class GameManager {
-    ItoGame itoGame;
+    ItoGame itoGame = new ItoGame("");
 
     public void startGame(String theme){
-        Deck deck = new Deck();
-        this.itoGame = new ItoGame(theme,deck);
+        this.itoGame = new ItoGame(theme);
         itoGame.startGame();
     };
 
     public void endGame(){
-        itoGame.endGame();
+        if(itoGame.getState().equals(ItoGame.GameState.Running)){itoGame.endGame();}
     }
 }

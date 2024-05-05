@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ItoGame {
 
@@ -18,10 +19,10 @@ public class ItoGame {
 
     private HashMap<Player, Card> map;
 
-    ItoGame(String theme, Deck deck){
+    ItoGame(String theme){
         this.state = GameState.Finished;
         this.theme = theme;
-        this.deck = deck;
+        this.deck = new Deck();
         this.map = new HashMap<>();
     }
 
@@ -38,6 +39,9 @@ public class ItoGame {
         if(getState().equals(GameState.Running)){
             broadcastMessage("ゲームを終了します");
             setState(GameState.Finished);
+            //showCard();
+        }else{
+            broadcastMessage("進行中のゲームがありません");
         }
     }
 
@@ -51,6 +55,14 @@ public class ItoGame {
 
     public void setState(GameState state) {
         this.state = state;
+    }
+
+    public void showCard(){
+        for(Map.Entry<Player, Card> entry : map.entrySet()){
+            Player player = entry.getKey();
+            Card card = entry.getValue();
+            broadcastMessage(player.getName() + " : "+ card.getNumber());
+        }
     }
 
     public void broadcastMessage(String message){
