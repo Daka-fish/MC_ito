@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-    List<Card> deck = new ArrayList<>();
+    private List<Card> deck = new ArrayList<>();
 
     Deck(){
         setDeck();
@@ -30,5 +30,9 @@ public class Deck {
         Card fstCard = deck.get(0);
         deck.remove(0);
         return fstCard;
+    }
+
+    public void resetDeck(){
+        deck.clear();
     }
 }
