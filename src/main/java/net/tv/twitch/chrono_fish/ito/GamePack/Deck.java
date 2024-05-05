@@ -1,4 +1,4 @@
-package net.tv.twitch.chrono_fish.ito;
+package net.tv.twitch.chrono_fish.ito.GamePack;
 
 import java.util.ArrayList;
 import java.util.Collections;

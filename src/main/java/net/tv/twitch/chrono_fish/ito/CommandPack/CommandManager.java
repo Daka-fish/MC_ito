@@ -1,7 +1,6 @@
-package net.tv.twitch.chrono_fish.ito;
+package net.tv.twitch.chrono_fish.ito.CommandPack;
 
-import java.util.List;
-
+import net.tv.twitch.chrono_fish.ito.GamePack.GameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

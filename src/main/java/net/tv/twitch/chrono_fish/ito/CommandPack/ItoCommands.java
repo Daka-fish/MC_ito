@@ -1,4 +1,4 @@
-package net.tv.twitch.chrono_fish.ito;
+package net.tv.twitch.chrono_fish.ito.CommandPack;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

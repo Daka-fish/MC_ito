@@ -1,8 +1,4 @@
-package net.tv.twitch.chrono_fish.ito;
-
-import org.bukkit.Bukkit;
-
-import java.util.List;
+package net.tv.twitch.chrono_fish.ito.GamePack;
 
 public class GameManager {
     ItoGame itoGame;
