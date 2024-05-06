@@ -17,17 +17,15 @@ public class ItoGame {
     private GameState state;
     private Deck deck;
 
-    private HashMap<Player, Card> map;
+    private HashMap<Player, Card> map = new HashMap<>();
 
     ItoGame(String theme){
         this.state = GameState.Finished;
         this.theme = theme;
         this.deck = new Deck();
-        this.map = new HashMap<>();
     }
 
-    public void startGame(){
-        setState(GameState.Running);
+    public void dealCard(){
         for(Player player : Bukkit.getOnlinePlayers()){
             Card card = deck.drawCard();
             player.sendMessage("あなたの数字は"+card.getNumber()+"です");
@@ -39,7 +37,7 @@ public class ItoGame {
         if(getState().equals(GameState.Running)){
             broadcastMessage("ゲームを終了します");
             setState(GameState.Finished);
-            //showCard();
+            showCard();
         }else{
             broadcastMessage("進行中のゲームがありません");
         }
@@ -58,6 +56,7 @@ public class ItoGame {
     }
 
     public void showCard(){
+        broadcastMessage("check");
         for(Map.Entry<Player, Card> entry : map.entrySet()){
             Player player = entry.getKey();
             Card card = entry.getValue();
