@@ -36,15 +36,6 @@ public class ItoGame {
         setState(GameState.Finished);
     }
 
-    public void dealCard(){
-        broadcastMessage("カードを配布します");
-        for(Player player : Bukkit.getOnlinePlayers()){
-            Card card = deck.drawCard();
-            player.sendMessage("あなたの数字は"+card.getNumber()+"です");
-            map.put(player,card);
-        }
-    }
-
     public String getTheme() {
         return theme;
     }
@@ -55,6 +46,15 @@ public class ItoGame {
 
     public void setState(GameState state) {
         this.state = state;
+    }
+
+    public void dealCard(){
+        broadcastMessage("カードを配布します");
+        for(Player player : Bukkit.getOnlinePlayers()){
+            Card card = deck.drawCard();
+            player.sendMessage("あなたの数字は"+card.getNumber()+"です");
+            map.put(player,card);
+        }
     }
 
     public void showCard(){
