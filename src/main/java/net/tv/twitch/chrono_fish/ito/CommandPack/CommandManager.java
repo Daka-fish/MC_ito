@@ -1,9 +1,13 @@
 package net.tv.twitch.chrono_fish.ito.CommandPack;
 
+import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class CommandManager {
+
+    static ItoGame itogame = new ItoGame("");
+
     public static void ito(Player sender, String[] args){
         if(args.length == 0){
             sender.sendMessage(ChatColor.RED+"Invalid usage");
@@ -12,19 +16,23 @@ public class CommandManager {
 
         switch (args[0]) {
             case "start":
-                sender.sendMessage("ゲームを開始します");
+                itogame = new ItoGame(args[1]);
+                itogame.startGame();
                 break;
                 
-            case "call":
-                sender.sendMessage("数字の宣言を開始します");
+            case "card":
+                itogame.dealCard();
                 break;
 
             case "check":
-                sender.sendMessage("成功判定をします");
+                itogame.broadcastMessage(""+itogame.getTheme());
                 break;
 
             case "end":
-                sender.sendMessage("ゲームを終了します");
+                if(itogame.getState().equals(ItoGame.GameState.Running)){
+                    itogame.endGame();
+                    itogame.showCard();
+                }
                 break;
 
             default:
