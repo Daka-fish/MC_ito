@@ -1,8 +1,0 @@
-net\tv\twitch\chrono_fish\ito\GamePack\Card.class
-net\tv\twitch\chrono_fish\ito\GamePack\Deck.class
-net\tv\twitch\chrono_fish\ito\CommandPack\ItoCommands.class
-net\tv\twitch\chrono_fish\ito\CommandPack\CommandManager.class
-net\tv\twitch\chrono_fish\ito\Ito.class
-net\tv\twitch\chrono_fish\ito\GamePack\ItoGame$GameState.class
-net\tv\twitch\chrono_fish\ito\GamePack\DeckManager.class
-net\tv\twitch\chrono_fish\ito\GamePack\ItoGame.class
