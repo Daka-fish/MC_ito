@@ -3,9 +3,6 @@ package net.tv.twitch.chrono_fish.ito.GamePack;
 import net.tv.twitch.chrono_fish.ito.ItoEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -15,7 +12,7 @@ public class ItoGame {
 
     public enum GameState{
         Running,
-        Finished;
+        Finished
     }
 
     private String theme;
@@ -62,6 +59,7 @@ public class ItoGame {
         for(Player player : Bukkit.getOnlinePlayers()){
             Card card = deck.drawCard();
             player.sendMessage("あなたの数字は"+card.getNumber()+"です");
+            player.getInventory().addItem(card.getPaper());
             map.put(player,card);
         }
     }
