@@ -16,16 +16,24 @@ public class CommandManager {
 
         switch (args[0]) {
             case "start":
+                if(args.length<2){
+                    sender.sendMessage(ChatColor.RED+"不明なコマンド\n/ito start <theme>");
+                    return;
+                }
                 itogame = new ItoGame(args[1]);
                 itogame.startGame();
-                break;
-                
-            case "card":
+                itogame.reloadBossBar();
+                itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です");
                 itogame.dealCard();
                 break;
 
-            case "check":
-                itogame.broadcastMessage(""+itogame.getTheme());
+            case "change":
+                if(args.length<2){
+                    sender.sendMessage(ChatColor.RED+"不明なコマンド\n /ito change <theme>");
+                    return;
+                }
+                itogame.setTheme(args[1]);
+                itogame.reloadBossBar();
                 break;
 
             case "end":

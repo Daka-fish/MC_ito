@@ -35,10 +35,6 @@ public class ItoGame {
 
     public void startGame(){
         broadcastMessage("ゲームを開始します");
-        for(Player player : Bukkit.getOnlinePlayers()){
-            ItoEvent.getBossBar().removeAll();
-            bossBar.addPlayer(player);
-        }
         setState(GameState.Running);
     }
 
@@ -62,7 +58,6 @@ public class ItoGame {
     }
 
     public void dealCard(){
-        broadcastMessage("カードを配布します");
         for(Player player : Bukkit.getOnlinePlayers()){
             Card card = deck.drawCard();
             player.sendMessage("あなたの数字は"+card.getNumber()+"です");
@@ -76,6 +71,13 @@ public class ItoGame {
             message.append(entry.getKey().getName()).append(" : ").append(entry.getValue().getNumber()).append("\n");
         }
         broadcastMessage(message.toString());
+    }
+
+    public void reloadBossBar(){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            ItoEvent.getBossBar().removeAll();
+            bossBar.addPlayer(player);
+        }
     }
 
     public void broadcastMessage(String message){
