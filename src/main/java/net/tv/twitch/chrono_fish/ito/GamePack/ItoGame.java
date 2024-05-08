@@ -1,7 +1,11 @@
 package net.tv.twitch.chrono_fish.ito.GamePack;
 
+import net.tv.twitch.chrono_fish.ito.ItoEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -20,14 +24,21 @@ public class ItoGame {
 
     private static HashMap<Player, Card> map = new HashMap<>();
 
+    private BossBar bossBar;
+
     public ItoGame(String theme){
         this.state = GameState.Finished;
         this.theme = theme;
         this.deck = new Deck();
+        this.bossBar = Bukkit.createBossBar(ChatColor.BOLD+theme,BarColor.PINK,BarStyle.SEGMENTED_10);
     }
 
     public void startGame(){
         broadcastMessage("ゲームを開始します");
+        for(Player player : Bukkit.getOnlinePlayers()){
+            ItoEvent.getBossBar().removeAll();
+            bossBar.addPlayer(player);
+        }
         setState(GameState.Running);
     }
 
@@ -39,6 +50,8 @@ public class ItoGame {
     public String getTheme() {
         return theme;
     }
+
+    public void setTheme(String theme){this.theme = theme;}
 
     public GameState getState() {
         return state;
