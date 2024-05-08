@@ -1,6 +1,7 @@
 package net.tv.twitch.chrono_fish.ito.CommandPack;
 
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
+import net.tv.twitch.chrono_fish.ito.ItoEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -20,11 +21,13 @@ public class CommandManager {
                     sender.sendMessage(ChatColor.RED+"不明なコマンド\n/ito start <theme>");
                     return;
                 }
-                itogame = new ItoGame(args[1]);
-                itogame.startGame();
-                itogame.reloadBossBar();
-                itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です");
-                itogame.dealCard();
+                if(itogame.getState().equals(ItoGame.GameState.Finished)){
+                    itogame = new ItoGame(args[1]);
+                    itogame.startGame();
+                    itogame.reloadBossBar();
+                    itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です\n");
+                    itogame.dealCard();
+                }
                 break;
 
             case "change":
@@ -32,15 +35,25 @@ public class CommandManager {
                     sender.sendMessage(ChatColor.RED+"不明なコマンド\n /ito change <theme>");
                     return;
                 }
-                itogame.setTheme(args[1]);
-                itogame.reloadBossBar();
+                if(itogame.getState().equals(ItoGame.GameState.Running)){
+                    itogame.setTheme(args[1]);
+                    itogame.broadcastMessage("テーマが"+itogame.getTheme()+"に変更されました");
+                    itogame.reloadBossBar();
+                    return;
+                }
+                sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");
                 break;
 
             case "end":
                 if(itogame.getState().equals(ItoGame.GameState.Running)){
                     itogame.endGame();
                     itogame.showCard();
+                    itogame.setTheme("ito");
+                    itogame.reloadBossBar();
+                    itogame.getMap().clear();
+                    return;
                 }
+                sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");
                 break;
 
             default:

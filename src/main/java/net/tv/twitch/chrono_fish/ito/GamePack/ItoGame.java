@@ -24,13 +24,10 @@ public class ItoGame {
 
     private static HashMap<Player, Card> map = new HashMap<>();
 
-    private BossBar bossBar;
-
     public ItoGame(String theme){
         this.state = GameState.Finished;
         this.theme = theme;
         this.deck = new Deck();
-        this.bossBar = Bukkit.createBossBar(ChatColor.BOLD+theme,BarColor.PINK,BarStyle.SEGMENTED_10);
     }
 
     public void startGame(){
@@ -57,6 +54,10 @@ public class ItoGame {
         this.state = state;
     }
 
+    public HashMap<Player, Card> getMap() {
+        return map;
+    }
+
     public void dealCard(){
         for(Player player : Bukkit.getOnlinePlayers()){
             Card card = deck.drawCard();
@@ -75,12 +76,12 @@ public class ItoGame {
 
     public void reloadBossBar(){
         for(Player player : Bukkit.getOnlinePlayers()){
-            ItoEvent.getBossBar().removeAll();
-            bossBar.addPlayer(player);
+            ItoEvent.getBossBar().setTitle(ChatColor.BOLD+theme);
+            ItoEvent.getBossBar().addPlayer(player);
         }
     }
 
     public void broadcastMessage(String message){
-        Bukkit.broadcastMessage(ChatColor.DARK_GREEN+"[itoGame]"+message);
+        Bukkit.broadcastMessage(ChatColor.GREEN+"[itoGame]"+message);
     }
 }
