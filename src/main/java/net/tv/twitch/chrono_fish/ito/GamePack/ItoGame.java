@@ -4,11 +4,14 @@ import net.tv.twitch.chrono_fish.ito.ItoEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ItoGame {
+public class ItoGame implements Listener {
 
     public enum GameState{
         Running,
@@ -19,7 +22,10 @@ public class ItoGame {
     private GameState state;
     private Deck deck;
 
+    private List<Card> field = new ArrayList<>();
+
     private static HashMap<Player, Card> map = new HashMap<>();
+
 
     public ItoGame(String theme){
         this.state = GameState.Finished;
@@ -77,6 +83,14 @@ public class ItoGame {
             ItoEvent.getBossBar().setTitle(ChatColor.BOLD+theme);
             ItoEvent.getBossBar().addPlayer(player);
         }
+    }
+
+    public List<Card> getField() {
+        return field;
+    }
+
+    public void putField(Card card){
+        this.field.add(card);
     }
 
     public void broadcastMessage(String message){
