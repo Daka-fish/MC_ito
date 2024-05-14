@@ -6,10 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ItoGame implements Listener {
 
@@ -85,12 +82,18 @@ public class ItoGame implements Listener {
         }
     }
 
-    public List<Card> getField() {
-        return field;
-    }
-
     public void putField(Card card){
         this.field.add(card);
+    }
+
+    public boolean checkField(){
+        List<Integer> list = new ArrayList<>();
+        for(Card card : this.field){
+            list.add(card.getNumber());
+        }
+        List<Integer> sortedList =new ArrayList<>(list);
+        Collections.sort(sortedList);
+        return list.equals(sortedList);
     }
 
     public void broadcastMessage(String message){
