@@ -12,7 +12,7 @@ public class Card {
     private int number;
     private ItemStack paper = new ItemStack(Material.PAPER);
 
-    Card(int i){
+    public Card(int i){
         this.number = i;
         ItemMeta paperMeta = paper.getItemMeta();
         List<String> lore = new ArrayList<>();

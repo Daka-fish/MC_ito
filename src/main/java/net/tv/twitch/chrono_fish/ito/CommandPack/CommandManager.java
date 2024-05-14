@@ -9,6 +9,8 @@ public class CommandManager {
 
     static ItoGame itogame = new ItoGame("");
 
+    public static ItoGame getItogame(){return itogame;}
+
     public static void ito(Player sender, String[] args){
         if(args.length == 0){
             sender.sendMessage(ChatColor.RED+"Invalid usage");

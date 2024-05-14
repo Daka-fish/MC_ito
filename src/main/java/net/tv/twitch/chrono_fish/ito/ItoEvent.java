@@ -1,5 +1,8 @@
 package net.tv.twitch.chrono_fish.ito;
 
+import net.tv.twitch.chrono_fish.ito.CommandPack.CommandManager;
+import net.tv.twitch.chrono_fish.ito.GamePack.Card;
+import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -32,6 +35,7 @@ public class ItoEvent implements Listener {
             String paperName = dropItem.getItemMeta().getDisplayName();
             try {
                 int number = Integer.parseInt(paperName);
+                CommandManager.getItogame().putField(new Card(number));
             } catch (NumberFormatException ex) {
                 throw new RuntimeException(ex);
             }
