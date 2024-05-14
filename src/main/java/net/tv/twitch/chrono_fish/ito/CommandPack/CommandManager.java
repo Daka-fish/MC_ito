@@ -46,6 +46,14 @@ public class CommandManager {
                 sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");
                 break;
 
+            case "check":
+                if(itogame.checkField()){
+                    itogame.broadcastMessage("成功!");
+                } else {
+                    itogame.broadcastMessage("失敗!");
+                }
+                break;
+
             case "end":
                 if(itogame.getState().equals(ItoGame.GameState.Running)){
                     itogame.endGame();
