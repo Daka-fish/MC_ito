@@ -2,12 +2,15 @@ package net.tv.twitch.chrono_fish.ito;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class ItoEvent implements Listener {
 
@@ -20,5 +23,18 @@ public class ItoEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         bossBar.addPlayer(e.getPlayer());
+    }
+
+    @EventHandler
+    public void onDrop(PlayerDropItemEvent e){
+        ItemStack dropItem = e.getItemDrop().getItemStack();
+        if(dropItem.getType() == Material.PAPER){
+            String paperName = dropItem.getItemMeta().getDisplayName();
+            try {
+                int number = Integer.parseInt(paperName);
+            } catch (NumberFormatException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }
