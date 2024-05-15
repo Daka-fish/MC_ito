@@ -47,6 +47,10 @@ public class CommandManager {
                 break;
 
             case "check":
+                if(itogame.getField().isEmpty()){
+                    sender.sendMessage(ChatColor.RED+"field is empty !\n");
+                    return;
+                }
                 if(itogame.checkField()){
                     itogame.broadcastMessage("成功!");
                 } else {

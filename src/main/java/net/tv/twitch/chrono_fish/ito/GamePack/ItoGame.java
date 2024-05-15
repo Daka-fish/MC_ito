@@ -86,6 +86,8 @@ public class ItoGame implements Listener {
         this.field.add(card);
     }
 
+    public List<Card> getField(){return field;}
+
     public boolean checkField(){
         List<Integer> list = new ArrayList<>();
         for(Card card : this.field){
