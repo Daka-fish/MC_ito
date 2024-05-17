@@ -36,7 +36,7 @@ public class ItoEvent implements Listener {
             try {
                 int number = Integer.parseInt(paperName);
                 CommandManager.getItogame().putField(new Card(number));
-                e.getPlayer().sendMessage("数字を宣言しました");
+                CommandManager.getItogame().broadcastMessage(e.getPlayer().getName()+"が数字を宣言しました");
             } catch (NumberFormatException ex) {
                 throw new RuntimeException(ex);
             }
