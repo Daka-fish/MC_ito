@@ -1,4 +1,5 @@
 /workspace.xml
 .idea/
 .vscode/
+.target/
 *.md
