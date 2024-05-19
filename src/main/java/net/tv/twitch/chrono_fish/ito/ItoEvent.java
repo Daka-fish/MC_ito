@@ -36,7 +36,7 @@ public class ItoEvent implements Listener {
             try {
                 int number = Integer.parseInt(paperName);
                 CommandManager.getItogame().putField(new Card(number), e.getPlayer().getName());
-                CommandManager.getItogame().broadcastMessage(e.getPlayer().getName()+"が数字を宣言しました");
+                CommandManager.getItogame().broadcastMessage(ChatColor.YELLOW+e.getPlayer().getName()+ChatColor.RESET+"が数字を宣言しました");
                 ItoScoreboard itoScoreboard = new ItoScoreboard();
                 itoScoreboard.addPlayerName(e.getPlayer().getName());
                 e.getPlayer().setScoreboard(itoScoreboard.getBoard());

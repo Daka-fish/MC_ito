@@ -69,11 +69,11 @@ public class ItoGame implements Listener {
 
     public void showCard(){
         StringBuilder message = new StringBuilder();
-        message.append("###############");
+        message.append("数字一覧を表示します").append("\n").append("+--------------+").append("\n");
         for(Map.Entry<Player, Card> entry : map.entrySet()){
-            message.append(entry.getKey().getName()).append(" : ").append(entry.getValue().getNumber()).append("\n");
+            message.append(entry.getKey().getName()).append(": ").append(entry.getValue().getNumber()).append("\n");
         }
-        message.append("###############");
+        message.append("+--------------+");
         broadcastMessage(message.toString());
     }
 
@@ -101,6 +101,6 @@ public class ItoGame implements Listener {
     }
 
     public void broadcastMessage(String message){
-        Bukkit.broadcastMessage(ChatColor.GREEN+"[itoGame]"+message);
+        Bukkit.broadcastMessage(ChatColor.GREEN+"[itoGame]"+ChatColor.RESET+message);
     }
 }
