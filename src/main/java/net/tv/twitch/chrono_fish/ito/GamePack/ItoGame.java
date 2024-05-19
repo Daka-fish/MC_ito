@@ -20,7 +20,6 @@ public class ItoGame implements Listener {
     private Deck deck;
 
     private List<Card> field = new ArrayList<>();
-    private List<String> fieldName = new ArrayList<>();
 
     private static HashMap<Player, Card> map = new HashMap<>();
 
@@ -87,7 +86,6 @@ public class ItoGame implements Listener {
 
     public void putField(Card card, String name){
         this.field.add(card);
-        this.fieldName.add(name);
     }
 
     public List<Card> getField(){return field;}
