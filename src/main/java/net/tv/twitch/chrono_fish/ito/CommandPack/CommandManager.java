@@ -1,9 +1,11 @@
 package net.tv.twitch.chrono_fish.ito.CommandPack;
 
+import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
-import net.tv.twitch.chrono_fish.ito.ItoEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public class CommandManager {
 
@@ -48,7 +50,8 @@ public class CommandManager {
                 break;
 
             case "check":
-                if(itogame.getField().isEmpty()){
+                List<Card> field = itogame.getField();
+                if(field.isEmpty()){
                     sender.sendMessage(ChatColor.RED+"field is empty !\n");
                     return;
                 }
@@ -57,6 +60,7 @@ public class CommandManager {
                 } else {
                     itogame.broadcastMessage("失敗!");
                 }
+                field.clear();
                 break;
 
             case "end":
