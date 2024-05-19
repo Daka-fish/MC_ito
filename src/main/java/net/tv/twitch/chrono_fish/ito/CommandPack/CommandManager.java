@@ -2,6 +2,8 @@ package net.tv.twitch.chrono_fish.ito.CommandPack;
 
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
+import net.tv.twitch.chrono_fish.ito.ItoScoreboard;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -31,6 +33,9 @@ public class CommandManager {
                     itogame.reloadBossBar();
                     itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です\n");
                     itogame.dealCard();
+                    for(Player player: Bukkit.getOnlinePlayers()){
+                        player.setScoreboard(new ItoScoreboard().getBoard());
+                    }
                 } else {
                     sender.sendMessage(ChatColor.RED+"既にゲームが進行中です");
                 }
