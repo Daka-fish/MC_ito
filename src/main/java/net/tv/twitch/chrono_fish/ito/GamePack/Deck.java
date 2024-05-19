@@ -30,6 +30,10 @@ public class Deck {
     public Card drawCard(){
         Card fstCard = deck.get(0);
         deck.remove(0);
+        if(deck.size()==0){
+            resetDeck();
+            deck = new Deck().getDeck();
+        }
         return fstCard;
     }
 
