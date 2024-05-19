@@ -23,4 +23,9 @@ public class ItoScoreboard {
     public Scoreboard getBoard() {
         return board;
     }
+
+    public void addPlayerName(String name){
+        Score score = obj.getScore(name);
+        score.setScore(-(obj.getScoreboard().getEntries().size()));
+    }
 }
