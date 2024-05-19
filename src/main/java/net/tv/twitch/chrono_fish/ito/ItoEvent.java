@@ -25,6 +25,7 @@ public class ItoEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         bossBar.addPlayer(e.getPlayer());
+        e.getPlayer().setScoreboard(new ItoScoreboard().getBoard());
     }
 
     @EventHandler
