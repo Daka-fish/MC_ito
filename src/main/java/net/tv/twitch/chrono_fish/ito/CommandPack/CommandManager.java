@@ -31,7 +31,7 @@ public class CommandManager {
                     itogame = new ItoGame(args[1]);
                     itogame.startGame();
                     itogame.reloadBossBar();
-                    itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です\n");
+                    itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です");
                     itogame.dealCard();
                     for(Player player: Bukkit.getOnlinePlayers()){
                         player.setScoreboard(new ItoScoreboard().getBoard());
