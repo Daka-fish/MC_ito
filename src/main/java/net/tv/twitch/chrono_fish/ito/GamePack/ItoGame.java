@@ -70,9 +70,11 @@ public class ItoGame implements Listener {
 
     public void showCard(){
         StringBuilder message = new StringBuilder();
+        message.append("###############");
         for(Map.Entry<Player, Card> entry : map.entrySet()){
             message.append(entry.getKey().getName()).append(" : ").append(entry.getValue().getNumber()).append("\n");
         }
+        message.append("###############");
         broadcastMessage(message.toString());
     }
 
