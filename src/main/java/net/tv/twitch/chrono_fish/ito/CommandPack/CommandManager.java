@@ -30,7 +30,6 @@ public class CommandManager {
                     itogame.startGame();
                     itogame.reloadBossBar();
                     itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です\n");
-                    itogame.broadcastMessage("それぞれのプレイヤーが紙を捨てることで数字の宣言となります");
                     itogame.dealCard();
                 } else {
                     sender.sendMessage(ChatColor.RED+"既にゲームが進行中です");
