@@ -2,6 +2,7 @@ package net.tv.twitch.chrono_fish.ito.CommandPack;
 
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
+import net.tv.twitch.chrono_fish.ito.Ito;
 import net.tv.twitch.chrono_fish.ito.ItoScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,9 +12,7 @@ import java.util.List;
 
 public class CommandManager {
 
-    static ItoGame itogame = new ItoGame("");
-
-    public static ItoGame getItogame(){return itogame;}
+    static ItoGame itogame = Ito.getItogame();
 
     public static void ito(Player sender, String[] args){
         if(args.length == 0){
