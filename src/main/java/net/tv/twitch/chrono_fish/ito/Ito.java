@@ -3,6 +3,7 @@ package net.tv.twitch.chrono_fish.ito;
 import net.tv.twitch.chrono_fish.ito.CommandPack.ItoCommands;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Ito extends JavaPlugin {
@@ -13,7 +14,7 @@ public final class Ito extends JavaPlugin {
     public void onEnable() {
         registerCommands();
         Bukkit.getPluginManager().registerEvents(new ItoEvent(),this);
-        itoGame = new ItoGame("準備中");
+        itoGame = new ItoGame(ChatColor.GRAY+"-準備中-");
     }
 
     public static ItoGame getItogame(){
