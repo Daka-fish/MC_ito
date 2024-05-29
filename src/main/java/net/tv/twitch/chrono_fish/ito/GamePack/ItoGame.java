@@ -67,13 +67,11 @@ public class ItoGame implements Listener {
         return firstTheme;
     }
 
-    public void dealCard(){
-        for(Player player : Bukkit.getOnlinePlayers()){
-            Card card = deck.drawCard();
-            player.sendMessage("あなたの数字は"+card.getNumber()+"です");
-            player.getInventory().addItem(card.getPaper());
-            numberHashMap.put(player.getName(),card);
-        }
+    public void dealCard(Player player){
+        Card card = deck.drawCard();
+        player.sendMessage("あなたの数字は"+card.getNumber()+"です");
+        player.getInventory().addItem(card.getPaper());
+        numberHashMap.put(player.getName(),card);
     }
 
     public void showCard(){

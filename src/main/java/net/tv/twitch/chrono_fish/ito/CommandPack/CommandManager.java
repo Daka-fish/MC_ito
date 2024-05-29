@@ -3,6 +3,7 @@ package net.tv.twitch.chrono_fish.ito.CommandPack;
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import net.tv.twitch.chrono_fish.ito.Ito;
+import net.tv.twitch.chrono_fish.ito.ItoScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -28,8 +29,13 @@ public class CommandManager {
                     itogame.setTheme(args[1]);
                     itogame.startGame();
                     itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です");
-                    itogame.dealCard();
-                    Bukkit.getOnlinePlayers().forEach(player -> itogame.getScoreboardHashMap().get(player).updateTheme(itogame.getFirstTheme()));
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        int currentNumber = itogame.getNumberHashMap().get(player.getName()).getNumber();
+                        ItoScoreboard itoScoreboard = itogame.getScoreboardHashMap().get(player);
+                        itogame.dealCard(player);
+                        itoScoreboard.updateTheme(itogame.getFirstTheme());
+                        itoScoreboard.updateNumber(currentNumber);
+                    });
                 } else {
                     sender.sendMessage(ChatColor.RED+"既にゲームが進行中です");
                 }
@@ -70,8 +76,12 @@ public class CommandManager {
                     itogame.endGame();
                     itogame.showCard();
                     itogame.setTheme(itogame.getFirstTheme());
-                    Bukkit.getOnlinePlayers().forEach(player -> itogame.getScoreboardHashMap().get(player).updateTheme(currentTheme));
-                    itogame.getNumberHashMap().clear();
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        int currentNumber = itogame.getNumberHashMap().get(player.getName()).getNumber();
+                        itogame.getScoreboardHashMap().get(player).updateTheme(currentTheme);
+                        itogame.getNumberHashMap().put(player.getName(), new Card(-1));
+                        itogame.getScoreboardHashMap().get(player).updateNumber(currentNumber);
+                    });
                     return;
                 }
                 sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");

@@ -5,7 +5,6 @@ import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.scoreboard.*;
 
 public class ItoScoreboard {
@@ -58,8 +57,8 @@ public class ItoScoreboard {
         obj.getScore("   └ "+Ito.getItogame().getTheme()).setScore(-2);
     }
 
-    public void updateNumber(Card card){
-        board.resetScores("   └ "+card.getNumber());
+    public void updateNumber(int currentNumber){
+        board.resetScores("   └ "+currentNumber);
         obj.getScore("   └ "+Ito.getItogame().getNumberHashMap().get(player.getName()).getNumber()).setScore(-5);
     }
 
