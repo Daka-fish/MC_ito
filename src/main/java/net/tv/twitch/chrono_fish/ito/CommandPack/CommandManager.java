@@ -8,8 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
 public class CommandManager {
 
     public static void ito(Player sender, String[] args){
@@ -57,8 +55,7 @@ public class CommandManager {
                 break;
 
             case "check":
-                List<Card> field = itogame.getField();
-                if(field.isEmpty()){
+                if(itogame.getField().isEmpty()){
                     sender.sendMessage(ChatColor.RED+"field is empty !\n");
                     return;
                 }
@@ -67,7 +64,6 @@ public class CommandManager {
                 } else {
                     itogame.broadcastMessage("失敗!");
                 }
-                field.clear();
                 break;
 
             case "end":
@@ -81,7 +77,9 @@ public class CommandManager {
                         itogame.getScoreboardHashMap().get(player).updateTheme(currentTheme);
                         itogame.getNumberHashMap().put(player.getName(), new Card(-1));
                         itogame.getScoreboardHashMap().get(player).updateNumber(currentNumber);
+                        itogame.getScoreboardHashMap().get(player).clearOrder();
                     });
+                    itogame.getField().clear();
                     return;
                 }
                 sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");

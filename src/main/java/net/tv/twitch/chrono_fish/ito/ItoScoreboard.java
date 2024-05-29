@@ -1,11 +1,12 @@
 package net.tv.twitch.chrono_fish.ito;
 
-import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
+
+import java.util.ArrayList;
 
 public class ItoScoreboard {
 
@@ -17,6 +18,7 @@ public class ItoScoreboard {
     private final String callOrder = ChatColor.BOLD+"+数字の宣言";
 
     Player player;
+    private final ArrayList<String> orderList = new ArrayList<>();
 
     public ItoScoreboard(Player player){
         this.player = player;
@@ -63,6 +65,14 @@ public class ItoScoreboard {
     }
 
     public void updateOrder(Player player){
-        obj.getScore(player.getName()).setScore(obj.getScore(callOrder).getScore()-1);
+        String callScore = ChatColor.YELLOW+String.valueOf(Ito.getItogame().getField().size())+ChatColor.RESET+" : "+player.getName();
+        orderList.add(callScore);
+        obj.getScore(callScore).setScore(-(board.getEntries().size()));
+    }
+
+    public void clearOrder(){
+        for(String s : orderList){
+            board.resetScores(s);
+        }
     }
 }
