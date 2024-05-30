@@ -42,7 +42,7 @@ public class ItoScoreboard {
         obj.getScore(theme).setScore(-1);
         obj.getScore("   └ "+itogame.getTheme()).setScore(-2);
         obj.getScore(yourNumber).setScore(-4);
-        obj.getScore("   └ "+itogame.getNumberHashMap().get(player.getName()).getNumber()).setScore(-5);
+        obj.getScore("   └ "+ChatColor.YELLOW+itogame.getNumberHashMap().get(player.getName()).getNumber()).setScore(-5);
         obj.getScore(callOrder).setScore(-7);
     }
 
@@ -60,8 +60,8 @@ public class ItoScoreboard {
     }
 
     public void updateNumber(int currentNumber){
-        board.resetScores("   └ "+currentNumber);
-        obj.getScore("   └ "+Ito.getItogame().getNumberHashMap().get(player.getName()).getNumber()).setScore(-5);
+        board.resetScores("   └ "+ChatColor.YELLOW+currentNumber);
+        obj.getScore("   └ "+ChatColor.YELLOW+Ito.getItogame().getNumberHashMap().get(player.getName()).getNumber()).setScore(-5);
     }
 
     public void updateOrder(Player player){
