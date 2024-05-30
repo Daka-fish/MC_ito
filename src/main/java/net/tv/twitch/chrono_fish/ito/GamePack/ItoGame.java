@@ -78,7 +78,7 @@ public class ItoGame implements Listener {
         StringBuilder message = new StringBuilder();
         message.append("数字一覧を表示します").append("\n").append("+--------------+").append("\n");
         for(Map.Entry<String, Card> entry : numberHashMap.entrySet()){
-            message.append(entry.getKey()).append(": ").append(entry.getValue().getNumber()).append("\n");
+            message.append(entry.getKey()).append(": ").append(ChatColor.YELLOW+String.valueOf(entry.getValue().getNumber())).append("\n");
         }
         message.append("+--------------+");
         broadcastMessage(message.toString());
