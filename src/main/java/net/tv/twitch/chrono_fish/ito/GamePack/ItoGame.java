@@ -100,6 +100,6 @@ public class ItoGame implements Listener {
     }
 
     public void broadcastMessage(String message){
-        Bukkit.broadcastMessage(ChatColor.GREEN+"[itoGame]"+ChatColor.RESET+message);
+        Bukkit.broadcastMessage(ChatColor.GREEN+"[ito]"+ChatColor.RESET+message);
     }
 }
