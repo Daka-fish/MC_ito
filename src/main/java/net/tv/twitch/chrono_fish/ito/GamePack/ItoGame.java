@@ -76,11 +76,10 @@ public class ItoGame implements Listener {
 
     public void showCard(){
         StringBuilder message = new StringBuilder();
-        message.append("数字一覧を表示します").append("\n").append("+--------------+").append("\n");
+        message.append("数字一覧を表示します").append("\n");
         for(Map.Entry<String, Card> entry : numberHashMap.entrySet()){
-            message.append(entry.getKey()).append(": ").append(ChatColor.YELLOW+String.valueOf(entry.getValue().getNumber())+ChatColor.RESET).append("\n");
+            message.append(entry.getKey()).append(": ").append(ChatColor.YELLOW+String.valueOf(entry.getValue().getNumber())+ChatColor.RESET);
         }
-        message.append("+--------------+");
         broadcastMessage(message.toString());
     }
 
