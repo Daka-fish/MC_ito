@@ -1,5 +1,9 @@
 package net.tv.twitch.chrono_fish.ito;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import org.bukkit.Bukkit;
@@ -17,6 +21,7 @@ public class ItoEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player joined = e.getPlayer();
+        joined.spigot().sendMessage(Ito.getMessage());
         ItoGame itoGame = Ito.getItogame();
         itoGame.getNumberHashMap().put(joined.getName(), new Card(-1));
         ItoScoreboard itoScoreboard = new ItoScoreboard(e.getPlayer());
