@@ -1,13 +1,15 @@
 package net.tv.twitch.chrono_fish.ito;
 
-import net.tv.twitch.chrono_fish.ito.CommandPack.CommandManager;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
+import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -16,16 +18,15 @@ import org.bukkit.inventory.ItemStack;
 
 public class ItoEvent implements Listener {
 
-    public static BossBar bossBar = Bukkit.createBossBar(ChatColor.BOLD+"ito", BarColor.GREEN, BarStyle.SEGMENTED_10);
-
-    public static BossBar getBossBar() {
-        return bossBar;
-    }
-
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        bossBar.addPlayer(e.getPlayer());
-        e.getPlayer().setScoreboard(new ItoScoreboard().getBoard());
+        Player joined = e.getPlayer();
+        joined.spigot().sendMessage(Ito.getMessage());
+        ItoGame itoGame = Ito.getItogame();
+        itoGame.getNumberHashMap().put(joined.getName(), new Card(-1));
+        ItoScoreboard itoScoreboard = new ItoScoreboard(e.getPlayer());
+        itoGame.getScoreboardHashMap().put(e.getPlayer(),itoScoreboard);
+        joined.setScoreboard(itoGame.getScoreboardHashMap().get(joined).getBoard());
     }
 
     @EventHandler
@@ -34,12 +35,16 @@ public class ItoEvent implements Listener {
         if(dropItem.getType() == Material.PAPER){
             String paperName = dropItem.getItemMeta().getDisplayName();
             try {
+                Player droper = e.getPlayer();
                 int number = Integer.parseInt(paperName);
-                CommandManager.getItogame().putField(new Card(number), e.getPlayer().getName());
-                CommandManager.getItogame().broadcastMessage(ChatColor.YELLOW+e.getPlayer().getName()+ChatColor.RESET+"が数字を宣言しました");
-                ItoScoreboard itoScoreboard = new ItoScoreboard();
-                itoScoreboard.addPlayerName(e.getPlayer().getName());
-                e.getPlayer().setScoreboard(itoScoreboard.getBoard());
+
+                ItoGame itoGame = Ito.getItogame();
+                itoGame.putField(new Card(number), droper.getName());
+                itoGame.broadcastMessage(ChatColor.YELLOW+droper.getName()+ChatColor.RESET+"が数字を宣言しました");
+                Bukkit.getOnlinePlayers().forEach(player -> {
+                    ItoScoreboard itoScoreboard = itoGame.getScoreboardHashMap().get(player);
+                    itoScoreboard.updateOrder(droper);
+                });
             } catch (NumberFormatException ex) {
                 throw new RuntimeException(ex);
             }

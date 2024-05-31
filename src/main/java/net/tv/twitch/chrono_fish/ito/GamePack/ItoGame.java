@@ -1,6 +1,6 @@
 package net.tv.twitch.chrono_fish.ito.GamePack;
 
-import net.tv.twitch.chrono_fish.ito.ItoEvent;
+import net.tv.twitch.chrono_fish.ito.ItoScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -21,8 +21,10 @@ public class ItoGame implements Listener {
 
     private List<Card> field = new ArrayList<>();
 
-    private static HashMap<Player, Card> map = new HashMap<>();
+    private final HashMap<String, Card> numberHashMap = new HashMap<>();
+    private final HashMap<Player, ItoScoreboard> scoreboardHashMap = new HashMap<>();
 
+    private final String firstTheme = ChatColor.GRAY+"-準備中-";
 
     public ItoGame(String theme){
         this.state = GameState.Finished;
@@ -54,34 +56,31 @@ public class ItoGame implements Listener {
         this.state = state;
     }
 
-    public HashMap<Player, Card> getMap() {
-        return map;
+    public HashMap<String, Card> getNumberHashMap() {
+        return numberHashMap;
+    }
+    public HashMap<Player, ItoScoreboard> getScoreboardHashMap() {
+        return scoreboardHashMap;
     }
 
-    public void dealCard(){
-        for(Player player : Bukkit.getOnlinePlayers()){
-            Card card = deck.drawCard();
-            player.sendMessage("あなたの数字は"+card.getNumber()+"です");
-            player.getInventory().addItem(card.getPaper());
-            map.put(player,card);
-        }
+    public String getFirstTheme(){
+        return firstTheme;
+    }
+
+    public void dealCard(Player player){
+        Card card = deck.drawCard();
+        player.sendMessage("あなたの数字は"+card.getNumber()+"です");
+        player.getInventory().addItem(card.getPaper());
+        numberHashMap.put(player.getName(),card);
     }
 
     public void showCard(){
         StringBuilder message = new StringBuilder();
-        message.append("数字一覧を表示します").append("\n").append("+--------------+").append("\n");
-        for(Map.Entry<Player, Card> entry : map.entrySet()){
-            message.append(entry.getKey().getName()).append(": ").append(entry.getValue().getNumber()).append("\n");
+        message.append("数字一覧を表示します").append("\n");
+        for(Map.Entry<String, Card> entry : numberHashMap.entrySet()){
+            message.append(entry.getKey()).append(": ").append(ChatColor.YELLOW+String.valueOf(entry.getValue().getNumber())+ChatColor.RESET);
         }
-        message.append("+--------------+");
         broadcastMessage(message.toString());
-    }
-
-    public void reloadBossBar(){
-        for(Player player : Bukkit.getOnlinePlayers()){
-            ItoEvent.getBossBar().setTitle(ChatColor.BOLD+theme);
-            ItoEvent.getBossBar().addPlayer(player);
-        }
     }
 
     public void putField(Card card, String name){
@@ -101,6 +100,6 @@ public class ItoGame implements Listener {
     }
 
     public void broadcastMessage(String message){
-        Bukkit.broadcastMessage(ChatColor.GREEN+"[itoGame]"+ChatColor.RESET+message);
+        Bukkit.broadcastMessage(ChatColor.GREEN+"[ito]"+ChatColor.RESET+message);
     }
 }

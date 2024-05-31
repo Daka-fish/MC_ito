@@ -2,20 +2,16 @@ package net.tv.twitch.chrono_fish.ito.CommandPack;
 
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
+import net.tv.twitch.chrono_fish.ito.Ito;
 import net.tv.twitch.chrono_fish.ito.ItoScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
 public class CommandManager {
 
-    static ItoGame itogame = new ItoGame("");
-
-    public static ItoGame getItogame(){return itogame;}
-
     public static void ito(Player sender, String[] args){
+        final ItoGame itogame = Ito.getItogame();
         if(args.length == 0){
             sender.sendMessage(ChatColor.RED+"Invalid usage");
             return;
@@ -28,14 +24,16 @@ public class CommandManager {
                     return;
                 }
                 if(itogame.getState().equals(ItoGame.GameState.Finished)){
-                    itogame = new ItoGame(args[1]);
+                    itogame.setTheme(args[1]);
                     itogame.startGame();
-                    itogame.reloadBossBar();
                     itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です");
-                    itogame.dealCard();
-                    for(Player player: Bukkit.getOnlinePlayers()){
-                        player.setScoreboard(new ItoScoreboard().getBoard());
-                    }
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        int currentNumber = itogame.getNumberHashMap().get(player.getName()).getNumber();
+                        ItoScoreboard itoScoreboard = itogame.getScoreboardHashMap().get(player);
+                        itogame.dealCard(player);
+                        itoScoreboard.updateTheme(itogame.getFirstTheme());
+                        itoScoreboard.updateNumber(currentNumber);
+                    });
                 } else {
                     sender.sendMessage(ChatColor.RED+"既にゲームが進行中です");
                 }
@@ -47,17 +45,17 @@ public class CommandManager {
                     return;
                 }
                 if(itogame.getState().equals(ItoGame.GameState.Running)){
+                    String currentTheme = itogame.getTheme();
                     itogame.setTheme(args[1]);
                     itogame.broadcastMessage("テーマが"+itogame.getTheme()+"に変更されました");
-                    itogame.reloadBossBar();
+                    Bukkit.getOnlinePlayers().forEach(player -> itogame.getScoreboardHashMap().get(player).updateTheme(currentTheme));
                     return;
                 }
                 sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");
                 break;
 
             case "check":
-                List<Card> field = itogame.getField();
-                if(field.isEmpty()){
+                if(itogame.getField().isEmpty()){
                     sender.sendMessage(ChatColor.RED+"field is empty !\n");
                     return;
                 }
@@ -66,16 +64,22 @@ public class CommandManager {
                 } else {
                     itogame.broadcastMessage("失敗!");
                 }
-                field.clear();
                 break;
 
             case "end":
                 if(itogame.getState().equals(ItoGame.GameState.Running)){
+                    String currentTheme = itogame.getTheme();
                     itogame.endGame();
                     itogame.showCard();
-                    itogame.setTheme("ito");
-                    itogame.reloadBossBar();
-                    itogame.getMap().clear();
+                    itogame.setTheme(itogame.getFirstTheme());
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        int currentNumber = itogame.getNumberHashMap().get(player.getName()).getNumber();
+                        itogame.getScoreboardHashMap().get(player).updateTheme(currentTheme);
+                        itogame.getNumberHashMap().put(player.getName(), new Card(-1));
+                        itogame.getScoreboardHashMap().get(player).updateNumber(currentNumber);
+                        itogame.getScoreboardHashMap().get(player).clearOrder();
+                    });
+                    itogame.getField().clear();
                     return;
                 }
                 sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");
