@@ -31,10 +31,10 @@ public final class Ito extends JavaPlugin {
     }
 
     public static TextComponent getMessage(){
-        TextComponent message = new TextComponent("ito version 1.1.0 is running. Check the newest release note from ");
-        TextComponent here = new TextComponent("here");
+        TextComponent message = new TextComponent(ChatColor.GOLD+"ito version 1.1.0 is running. Check the newest release note from ");
+        TextComponent here = new TextComponent(ChatColor.UNDERLINE+"here");
 
-        here.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,"https://github.com/Daka-fish/MC_ito/releases")); // リンクを指定
+        here.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,"https://github.com/Daka-fish/MC_ito/releases"));
         here.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Click to open the release note")));
         message.addExtra(here);
         return message;
