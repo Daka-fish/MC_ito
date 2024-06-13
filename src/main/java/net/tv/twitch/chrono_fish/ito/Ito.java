@@ -18,7 +18,7 @@ public final class Ito extends JavaPlugin {
     public void onEnable() {
         registerCommands();
         Bukkit.getPluginManager().registerEvents(new ItoEvent(),this);
-        itoGame = new ItoGame(ChatColor.GRAY+"-準備中-");
+        itoGame = new ItoGame();
     }
 
     public static ItoGame getItogame(){
