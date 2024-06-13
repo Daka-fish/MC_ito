@@ -26,9 +26,9 @@ public class ItoGame implements Listener {
 
     private final String firstTheme = ChatColor.GRAY+"-準備中-";
 
-    public ItoGame(String theme){
+    public ItoGame(){
         this.state = GameState.Finished;
-        this.theme = theme;
+        this.theme = firstTheme;
         this.deck = new Deck();
     }
 
