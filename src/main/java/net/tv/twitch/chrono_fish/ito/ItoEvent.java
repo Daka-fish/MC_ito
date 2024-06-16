@@ -31,15 +31,15 @@ public class ItoEvent implements Listener {
         if(dropItem.getType() == Material.PAPER){
             String paperName = dropItem.getItemMeta().getDisplayName();
             try {
-                Player droper = e.getPlayer();
+                Player dropper = e.getPlayer();
                 int number = Integer.parseInt(paperName);
 
                 ItoGame itoGame = Ito.getItogame();
-                itoGame.putField(new Card(number), droper.getName());
-                itoGame.broadcastMessage(ChatColor.YELLOW+droper.getName()+ChatColor.RESET+"が数字を宣言しました");
+                itoGame.putField(dropper, new Card(number));
+                itoGame.broadcastMessage(ChatColor.YELLOW+dropper.getName()+ChatColor.RESET+"が数字を宣言しました");
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     ItoScoreboard itoScoreboard = itoGame.getScoreboardHashMap().get(player);
-                    itoScoreboard.updateOrder(droper);
+                    itoScoreboard.updateOrder(dropper);
                 });
             } catch (NumberFormatException ex) {
                 throw new RuntimeException(ex);
