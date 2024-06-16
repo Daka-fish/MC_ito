@@ -65,7 +65,7 @@ public class ItoScoreboard {
     }
 
     public void updateOrder(Player player){
-        String callScore = ChatColor.YELLOW+String.valueOf(Ito.getItogame().getField().size())+ChatColor.RESET+" : "+player.getName();
+        String callScore = ChatColor.YELLOW+String.valueOf(Ito.getItogame().getCardField().size())+ChatColor.RESET+" : "+player.getName();
         orderList.add(callScore);
         obj.getScore(callScore).setScore(-(board.getEntries().size()));
     }
