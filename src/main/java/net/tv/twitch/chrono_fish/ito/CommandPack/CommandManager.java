@@ -55,15 +55,11 @@ public class CommandManager {
                 break;
 
             case "check":
-                if(itogame.getField().isEmpty()){
-                    sender.sendMessage(ChatColor.RED+"field is empty !\n");
+                if(itogame.getCardField().isEmpty()){
+                    sender.sendMessage(ChatColor.RED+"field is empty!");
                     return;
                 }
-                if(itogame.checkField()){
-                    itogame.broadcastMessage("成功!");
-                } else {
-                    itogame.broadcastMessage("失敗!");
-                }
+                itogame.openCard();
                 break;
 
             case "end":
@@ -79,7 +75,7 @@ public class CommandManager {
                         itogame.getScoreboardHashMap().get(player).updateNumber(currentNumber);
                         itogame.getScoreboardHashMap().get(player).clearOrder();
                     });
-                    itogame.getField().clear();
+                    itogame.getCardField().clear();
                     return;
                 }
                 sender.sendMessage(ChatColor.RED+"進行中のゲームはありません\n");
