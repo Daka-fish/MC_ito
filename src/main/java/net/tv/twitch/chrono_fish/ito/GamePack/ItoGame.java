@@ -19,12 +19,15 @@ public class ItoGame implements Listener {
     private GameState state;
     private Deck deck;
 
-    private List<Card> field = new ArrayList<>();
+    private List<Card> cardField = new ArrayList<>();
+    private List<Player> playerField = new ArrayList<>();
 
     private final HashMap<String, Card> numberHashMap = new HashMap<>();
     private final HashMap<Player, ItoScoreboard> scoreboardHashMap = new HashMap<>();
 
     private final String firstTheme = ChatColor.GRAY+"-準備中-";
+
+    private int order = 0;
 
     public ItoGame(){
         this.state = GameState.Finished;
@@ -83,20 +86,36 @@ public class ItoGame implements Listener {
         broadcastMessage(message.toString());
     }
 
-    public void putField(Card card, String name){
-        this.field.add(card);
+    public void putField(Player player, Card card){
+        playerField.add(player);
+        cardField.add(card);
     }
 
-    public List<Card> getField(){return field;}
+    public List<Card> getCardField(){return cardField;}
 
     public boolean checkField(){
         List<Integer> list = new ArrayList<>();
-        for(Card card : this.field){
+        for(Card card : this.cardField){
             list.add(card.getNumber());
         }
         List<Integer> sortedList =new ArrayList<>(list);
         Collections.sort(sortedList);
         return list.equals(sortedList);
+    }
+
+    public void openCard(){
+        if(order==playerField.size()){
+            if(checkField()){
+                broadcastMessage("成功!");
+            }else{
+                broadcastMessage("失敗!");
+            }
+            return;
+        }
+        String name = playerField.get(order).getName();
+        int number = cardField.get(order).getNumber();
+        broadcastMessage(name+": "+number);
+        order++;
     }
 
     public void broadcastMessage(String message){
