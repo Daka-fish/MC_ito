@@ -1,6 +1,5 @@
 package net.tv.twitch.chrono_fish.ito.CommandPack;
 
-import net.tv.twitch.chrono_fish.ito.GamePack.ArmorStandManager;
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import net.tv.twitch.chrono_fish.ito.Ito;
@@ -66,8 +65,6 @@ public class CommandManager {
 
             case "end":
                 if(itogame.getState().equals(ItoGame.GameState.Running)){
-                    ArmorStandManager armorStandManager = new ArmorStandManager(itogame.getGameLoc());
-                    armorStandManager.displayPlayerNumber(itogame.getGameLoc());
                     String currentTheme = itogame.getTheme();
                     itogame.endGame();
                     itogame.showCard();

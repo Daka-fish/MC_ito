@@ -6,11 +6,15 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-public class ArmorStandManager {
+public class ItoArmorStand {
 
+    private int id;
+    private String name;
     private final Location loc;
 
-    public ArmorStandManager(Location loc){
+    public ItoArmorStand(int id, String name,Location loc){
+        this.id = id;
+        this.name = name;
         this.loc = loc;
     }
 
