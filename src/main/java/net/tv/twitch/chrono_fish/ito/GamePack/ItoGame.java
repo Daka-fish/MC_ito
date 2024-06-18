@@ -3,6 +3,7 @@ package net.tv.twitch.chrono_fish.ito.GamePack;
 import net.tv.twitch.chrono_fish.ito.ItoScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -26,6 +27,8 @@ public class ItoGame implements Listener {
     private final HashMap<Player, ItoScoreboard> scoreboardHashMap = new HashMap<>();
 
     private final String firstTheme = ChatColor.GRAY+"-準備中-";
+
+    private Location gameLoc = Bukkit.getWorld("world").getSpawnLocation();
 
     private int order = 0;
 
@@ -116,6 +119,13 @@ public class ItoGame implements Listener {
         int number = cardField.get(order).getNumber();
         broadcastMessage(name+": "+number);
         order++;
+    }
+
+    public void setGameLoc(Location loc){
+        gameLoc = loc;
+    }
+    public Location getGameLoc(){
+        return gameLoc;
     }
 
     public void broadcastMessage(String message){
