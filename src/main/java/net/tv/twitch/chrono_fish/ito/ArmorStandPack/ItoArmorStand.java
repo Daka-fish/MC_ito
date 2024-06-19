@@ -1,4 +1,4 @@
-package net.tv.twitch.chrono_fish.ito.GamePack;
+package net.tv.twitch.chrono_fish.ito.ArmorStandPack;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 
 public class ItoArmorStand {
 
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     private final Location loc;
 
     public ItoArmorStand(int id, String name,Location loc){
@@ -27,13 +27,8 @@ public class ItoArmorStand {
         armorStand.setMarker(true);
     }
 
-    public void displayPlayerNumber(Location gameLoc){
-        Location baseLocation = gameLoc;
-        int index = 0;
-
-        for(Player player : Bukkit.getOnlinePlayers()){
-            Location loc = baseLocation.clone().add(0,index*0.3,0);
-            createArmorStand(loc,player.getName());
-        }
+    public void displayPlayerNumber(Player player){
+        player.sendMessage("アーマーを召喚します");
+        createArmorStand(loc,player.getName());
     }
 }

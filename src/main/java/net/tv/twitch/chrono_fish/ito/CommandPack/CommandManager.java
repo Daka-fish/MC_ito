@@ -1,5 +1,6 @@
 package net.tv.twitch.chrono_fish.ito.CommandPack;
 
+import net.tv.twitch.chrono_fish.ito.ArmorStandPack.ItoArmorStand;
 import net.tv.twitch.chrono_fish.ito.GamePack.Card;
 import net.tv.twitch.chrono_fish.ito.GamePack.ItoGame;
 import net.tv.twitch.chrono_fish.ito.Ito;
@@ -27,13 +28,17 @@ public class CommandManager {
                     itogame.setTheme(args[1]);
                     itogame.startGame();
                     itogame.broadcastMessage("テーマは"+itogame.getTheme()+"です");
+                    itogame.setGameLoc(sender.getLocation());
+                    ItoArmorStand itoArmorStand = new ItoArmorStand(0, sender.getName(),itogame.getGameLoc());
+
+                    itoArmorStand.displayPlayerNumber(sender);
+
                     Bukkit.getOnlinePlayers().forEach(player -> {
                         int currentNumber = itogame.getNumberHashMap().get(player.getName()).getNumber();
                         ItoScoreboard itoScoreboard = itogame.getScoreboardHashMap().get(player);
                         itogame.dealCard(player);
                         itoScoreboard.updateTheme(itogame.getFirstTheme());
                         itoScoreboard.updateNumber(currentNumber);
-                        itogame.setGameLoc(sender.getLocation());
                     });
                 } else {
                     sender.sendMessage(ChatColor.RED+"既にゲームが進行中です");
